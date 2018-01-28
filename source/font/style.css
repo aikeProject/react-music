@@ -1,0 +1,86 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?iv6nzq');
+  src:  url('fonts/icomoon.eot?iv6nzq#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?iv6nzq') format('truetype'),
+    url('fonts/icomoon.woff?iv6nzq') format('woff'),
+    url('fonts/icomoon.svg?iv6nzq#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-back:before {
+  content: "\e900";
+}
+.icon-delete:before {
+  content: "\e901";
+}
+.icon-fe-music:before {
+  content: "\e902";
+}
+.icon-list-play:before {
+  content: "\e903";
+}
+.icon-music:before {
+  content: "\e904";
+}
+.icon-next:before {
+  content: "\e905";
+}
+.icon-pause:before {
+  content: "\e906";
+}
+.icon-play:before {
+  content: "\e907";
+}
+.icon-play-list:before {
+  content: "\e908";
+}
+.icon-previous:before {
+  content: "\e909";
+}
+.icon-search:before {
+  content: "\e90a";
+}
+.icon-shuffle-play:before {
+  content: "\e90b";
+}
+.icon-single-play:before {
+  content: "\e90c";
+}
+.icon-user:before {
+  content: "\e90d";
+}
+.icon-分类:before {
+  content: "\e90e";
+}
+.icon-关闭:before {
+  content: "\e90f";
+}
+.icon-换一换:before {
+  content: "\e910";
+}
+.icon-收藏:before {
+  content: "\e911";
+}
+.icon-首页:before {
+  content: "\e912";
+}
+.icon-我的:before {
+  content: "\e913";
+}
