@@ -22,14 +22,29 @@ export class Album {
  */
 export function createAlbumByList(data) {
     return new Album(
-        data.album_id, // 专辑id
-        data.album_mid, // 图片
+        data.album_id, //
+        data.album_mid, // 专辑id
         data.album_name, // 专辑名称
         `https://y.gtimg.cn/music/photo_new/T002R300x300M000${data.album_mid}.jpg?max_age=2592000`, // 专辑图片地址
         filterSinger(data.singers),
         data.public_time, // 发行时间
     )
-};
+}
+
+/**
+ * 专辑详情数据创建专辑对象函数
+ * @param data 专辑的详情数据
+ */
+export function createAlbumByDetail(data) {
+    return new Album(
+        data.id,
+        data.mid, // 专辑id
+        data.name,
+        `http://y.gtimg.cn/music/photo_new/T002R300x300M000${data.mid}.jpg?max_age=2592000`, // 专辑图片
+        data.singername,
+        data.aDate
+    )
+}
 
 // 歌手
 function filterSinger(singers) {

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Route} from 'react-router-dom';
 import './style.styl';
 /******** 轮播组件 *******/
 import Swiper from 'swiper';
@@ -10,6 +11,12 @@ import {createAlbumByList} from '@/model/album';
 // 公用组件
 // 滑屏
 import Scroll from '@/common/scroll/Scroll';
+// 图片懒加载
+import LazyLoad, {forceCheck} from 'react-lazyload';
+// loading组件
+import Loading from '@/common/loading/Loading';
+// 专辑详情组件
+import Album from '../album/Album';
 
 class Recommend extends Component {
     constructor(props) {
@@ -18,8 +25,10 @@ class Recommend extends Component {
             sliderList: [],  // 轮播数据
             albumlibList: [], // 专辑列表
             refreshScroll: false, // 刷新滑动组件
+            loading: true
         }
     }
+
     componentDidMount() {
         // ****** 初始化轮播插件 ******
         // 获取轮播数据
@@ -49,7 +58,8 @@ class Recommend extends Component {
                 if (res.code === CODE_SUCCESS) {
                     const albumlibList = res.albumlib.data.list;
                     this.setState({
-                        albumlibList
+                        albumlibList,
+                        loading: false
                     }, () => {
                         // 更新专辑列表后刷新
                         this.setState({
@@ -68,6 +78,7 @@ class Recommend extends Component {
             window.location.href = linkUrl;
         }
     }
+
     swiper() {
         const sliderList = this.state.sliderList;
         return (
@@ -82,16 +93,21 @@ class Recommend extends Component {
             })
         )
     }
+
     /* ********* end ******** */
 
     /********  专辑推荐列表  ********/
     albumList() {
+        const {match} = this.props;
         return this.state.albumlibList.map((value) => {
             let album = createAlbumByList(value);
             return (
-                <div className={'album-wrapper'} key={album.id}>
+                <div className={'album-wrapper'} key={album.id}
+                    onClick={this.toAlbumDetail(`${match.url + '/' + album.mId}`)}>
                     <div className={'left'}>
-                        <img src={album.img} alt={album.name}/>
+                        <LazyLoad>
+                            <img src={album.img} alt={album.name}/>
+                        </LazyLoad>
                     </div>
                     <div className={'right'}>
                         <div className={'music-name'}>
@@ -108,11 +124,24 @@ class Recommend extends Component {
             )
         });
     }
+    // 专辑详情页路由跳转
+    toAlbumDetail(url) {
+        return () => {
+            this.props.history.push(
+                {
+                    pathname: url
+                }
+            )
+        }
+    }
     /*************  end ************/
     render() {
+        const {match} = this.props;
         return (
             <div className={'recommend'}>
-                <Scroll refresh={this.state.refreshScroll} >
+                <Scroll refresh={this.state.refreshScroll} onScroll={(e) => {
+                    forceCheck(); // 强制检查元素位置
+                }}>
                     <div className={'slider-container'}>
                         <div className="swiper-container">
                             <div className="swiper-wrapper">
@@ -132,6 +161,8 @@ class Recommend extends Component {
                         </div>
                     </div>
                 </Scroll>
+                <Loading loading={this.state.loading} title={'加载中...'}/>
+                <Route path={`${match.url}/:id`} component={Album}/>
             </div>
         )
     }

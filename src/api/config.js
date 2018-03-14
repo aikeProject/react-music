@@ -3,7 +3,11 @@ const URL = {
   // 轮播接口
     carousel : 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg',
   // 专辑推荐
-    recommend: 'https://u.y.qq.com/cgi-bin/musicu.fcg'
+    recommend: 'https://u.y.qq.com/cgi-bin/musicu.fcg',
+  // 专辑详情
+    albumInfo: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg',
+  // 歌曲vkey
+    songKey: 'https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg',
 };
 // 接口中相同的参数
 const PARAM = {

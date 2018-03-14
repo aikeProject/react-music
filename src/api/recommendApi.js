@@ -47,4 +47,16 @@ function getRecommendList() {
     return jsonp(URL.recommend, data, OPTION);
 }
 
-export {getCarousel, getRecommendList};
+// 获取专辑详情
+function getAlbumInfo(albumMid) {
+    const data = Object.assign({}, PARAM, {
+        albummid: albumMid,
+        g_tk: 1278911659,
+        hostUin: 0,
+        platform: "yqq",
+        needNewCode: 0
+    });
+    return jsonp(URL.albumInfo, data, OPTION);
+}
+
+export {getCarousel, getRecommendList, getAlbumInfo};
