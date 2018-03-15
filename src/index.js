@@ -7,8 +7,9 @@ import './index.styl';
 // 字体图标
 import '@/assets/stylus/font.styl';
 
-import App from './component/App';
+// import App from './component/App';
+import Root from './component/Root';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Root />, document.getElementById('root'));
 registerServiceWorker();

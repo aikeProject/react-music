@@ -1,0 +1,23 @@
+$zIndex = 1
+.progress-bar
+    position relative
+    height 0.06rem
+    background #ff80ca
+    margin 0.12rem 0
+    .progress, .progress-button
+        position absolute
+        top 0
+        left 0
+        height 100%
+    .progress-load
+        z-index $zIndex
+    .progress
+        background-color #fa1781
+        z-index $zIndex + 1
+    .progress-button
+        width 0.3rem
+        height 0.3rem
+        border-radius 50%
+        background #fa1781
+        top -0.12rem
+        z-index $zIndex + 2

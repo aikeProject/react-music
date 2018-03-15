@@ -102,7 +102,7 @@ class Album extends Component {
     // 获取歌曲的vKey
     getSongUrl(song, mId) {
         getSongVKey(mId).then((res) => {
-            if (res && res.code == CODE_SUCCESS) {
+            if (res && res.code === CODE_SUCCESS) {
                 const item = res.data.items[0];
                 // 播放地址
                 // filename 歌曲文件
@@ -119,11 +119,22 @@ class Album extends Component {
         })
     }
 
+    /*              歌曲播放设置             */
+    // 选择歌曲
+    selectSong(song) {
+        const {changeCurrentSong, setMusicSongs} = this.props;
+        return () => {
+            setMusicSongs([song]);
+            changeCurrentSong(song);
+        }
+    }
+    /*                 END                 */
+
     render() {
         let {album, songs} = this.state;
         let newSongs = songs.map((item) => {
             return (
-                <div className={'song'} key={item.id}>
+                <div className={'song'} key={item.id} onClick={this.selectSong(item)}>
                     <div className={'song-name'}>{item.name}</div>
                     <div className={'song-singer'}>{item.singer}</div>
                 </div>
@@ -165,6 +176,7 @@ class Album extends Component {
                             </Scroll>
                         </div>
                     </div>
+                    <Loading title={'加载中...'} loading={this.state.loading}/>
                 </div>
             </CSSTransition>
         )

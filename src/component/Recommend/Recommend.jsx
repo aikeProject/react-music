@@ -16,7 +16,8 @@ import LazyLoad, {forceCheck} from 'react-lazyload';
 // loading组件
 import Loading from '@/common/loading/Loading';
 // 专辑详情组件
-import Album from '../album/Album';
+// import Album from '../album/Album';
+import Album from '@/containers/Album';
 
 class Recommend extends Component {
     constructor(props) {
