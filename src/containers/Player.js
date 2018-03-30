@@ -5,7 +5,7 @@
  *
  */
 import {connect} from 'react-redux';
-import Player from '../component/play/Player';
+import Player from '../component/play/Player/Player';
 import {showPlayer, changeSong} from '../redux/actions';
 
 /**
@@ -17,7 +17,7 @@ import {showPlayer, changeSong} from '../redux/actions';
  */
 const mapStateToProps = ({showStatus, song, songs}) =>{
     return {
-        showStatus, song, songs
+        showStatus, currentSong: song, songs
     }
 };
 /**

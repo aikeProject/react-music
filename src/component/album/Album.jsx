@@ -18,6 +18,8 @@ import {getSongVKey} from '@/api/song';
 // 动画组件
 import {CSSTransition} from 'react-transition-group';
 
+import {getTransitionEndName} from "@/util/event";
+
 class Album extends Component {
     constructor(props) {
         super(props);
@@ -36,7 +38,7 @@ class Album extends Component {
         const albumContentDom = ReactDOM.findDOMNode(this.refs.albumContent);
         // console.log(albumBgDom.offsetHeight);
         albumContentDom.style.top = albumBgDom.offsetHeight + 'px';
-
+        this.initMusicIco();
         // 实现动画
         this.setState({
             show: true,
@@ -84,14 +86,14 @@ class Album extends Component {
         const playButton = ReactDOM.findDOMNode(this.refs.playButton);
         if (y < 0) { // 向上滚动
             // 当向上滑动的距离超过，专辑封面的高度，隐藏大图，显示header区域的小图
-            if (Math.abs(y) +55 > albumBgDom.offsetHeight) {
+            if (Math.abs(y) + 55 > albumBgDom.offsetHeight) {
                 albumBgFixed.style.display = 'block';
             } else {
                 albumBgFixed.style.display = 'none';
             }
         } else {
             // 向下滚动
-            const scale = 1 + y *0.01 > 2 ? 2 : 1 + y *0.01;
+            const scale = 1 + y * 0.01 > 2 ? 2 : 1 + y * 0.01;
             const transform = `scale(${scale})`;
             albumBgDom.style['webkitTransform'] = transform;
             albumBgDom.style['transform'] = transform;
@@ -120,15 +122,74 @@ class Album extends Component {
     }
 
     /*              歌曲播放设置             */
+
     // 选择歌曲
     selectSong(song) {
-        const {changeCurrentSong, setMusicSongs} = this.props;
-        return () => {
+        const {changeCurrentSong, setMusicSongs, showMusicPlayer} = this.props;
+        return (e) => {
             setMusicSongs([song]);
             changeCurrentSong(song);
+            // showMusicPlayer(true);
+            this.startMusicIcoAnimation(e.nativeEvent);
         }
     }
+
+    // 播放全部歌曲
+    playAll = (e) => {
+        // console.log(e);
+        const {changeCurrentSong, showMusicPlayer, setMusicSongs} = this.props;
+        if (this.state.songs.length > 0) {
+            setMusicSongs(this.state.songs);
+            changeCurrentSong(this.state.songs[0]);
+            showMusicPlayer(true);
+        }
+    };
     /*                 END                 */
+
+    // 音符动画
+    initMusicIco() {  // 初始化
+        this.musicIcos = [];
+        this.musicIcos.push(ReactDOM.findDOMNode(this.refs.musicIco1));
+        this.musicIcos.push(ReactDOM.findDOMNode(this.refs.musicIco2));
+        this.musicIcos.push(ReactDOM.findDOMNode(this.refs.musicIco3));
+        // 状态初始化
+        this.musicIcos.forEach((item) => {
+            item.run = false;
+            let transitionEndName = getTransitionEndName(item);
+            item.addEventListener(transitionEndName, function () {
+                this.style.display = 'none'; // 元素隐藏
+                this.style['webkitTransform'] = 'translate3d(0, 0, 0)';
+                this.style['transform'] = 'translate3d(0, 0, 0)';
+                this.run = false;
+                let icon = this.querySelector('div');
+                icon.style['webkitTransform'] = 'translate3d(0, 0, 0)';
+                icon.style['transform'] = 'translate3d(0, 0, 0)';
+            }, false)
+        })
+    }
+
+    startMusicIcoAnimation({clientX, clientY}) {
+        if (this.musicIcos.length > 0) {
+            for (let i = 0; i < this.musicIcos.length; i++) {
+                let item = this.musicIcos[i];
+                // 选择未动画的元素开始动画
+                if (item.run === false) {
+                    item.style.top = clientY + 'px';
+                    item.style.left = clientX + 'px';
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.run = true;
+                        item.style['webkitTransform'] = 'translate3d(0, 1000px, 0)';
+                        item.style['transform'] = 'translate3d(0, 1000px, 0)';
+                        let icon = item.querySelector('div');
+                        icon.style['webkitTransform'] = 'translate3d(-30px, 0, 0)';
+                        icon.style['transform'] = 'translate3d(-30px, 0, 0)';
+                    }, 10);
+                    break;
+                }
+            }
+        }
+    }
 
     render() {
         let {album, songs} = this.state;
@@ -148,10 +209,11 @@ class Album extends Component {
                         <div ref={'albumBg'} className={'album-img'} style={{backgroundImage: `url(${album.img})`}}>
                             <div className={'filter'}></div>
                         </div>
-                        <div ref={'albumBgFixed'} className={'album-img fixed'} style={{backgroundImage: `url(${album.img})`}}>
+                        <div ref={'albumBgFixed'} className={'album-img fixed'}
+                             style={{backgroundImage: `url(${album.img})`}}>
                             <div className={'filter'}></div>
                         </div>
-                        <div ref={'playButton'} className={'play-wrapper'}>
+                        <div ref={'playButton'} className={'play-wrapper'} onClick={this.playAll}>
                             <div className={'play-button'}>
                                 <i className={'icon-play'}></i>
                                 <span>播放全部</span>
@@ -175,6 +237,15 @@ class Album extends Component {
                                 </div>
                             </Scroll>
                         </div>
+                    </div>
+                    <div className="music-ico" ref="musicIco1">
+                        <div className="icon-fe-music"></div>
+                    </div>
+                    <div className="music-ico" ref="musicIco2">
+                        <div className="icon-fe-music"></div>
+                    </div>
+                    <div className="music-ico" ref="musicIco3">
+                        <div className="icon-fe-music"></div>
                     </div>
                     <Loading title={'加载中...'} loading={this.state.loading}/>
                 </div>

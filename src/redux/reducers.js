@@ -57,7 +57,7 @@ function song(song = initState.song, action) {
 function songs(songs = initState.songs, action) {
     switch (action.type) {
         case SET_SONGS:
-            return [...songs, action.songs];
+            return action.songs;
         case REMOVE_SONG_FROM_LIST:
             return songs.filter(song => song.id !== action.id);
         default:

@@ -213,22 +213,27 @@ https://u.y.qq.com/cgi-bin/musicu.fcg?
     data=%7B%22albumlib%22%3A%7B%22method%22%3A%22get_album_by_tags%22%2C%22param%22%3A%7B%22area%22%3A7%2C%22company%22%3A-1%2C%22genre%22%3A-1%2C%22type%22%3A-1%2C%22year%22%3A-1%2C%22sort%22%3A2%2C%22get_tags%22%3A1%2C%22sin%22%3A0%2C%22num%22%3A20%2C%22click_albumid%22%3A0%7D%2C%22module%22%3A%22music.web_album_library%22%7D%7D
 ```
 ****
+<br /><br />
 * JSONP使用
     * 安装 `yarn add jsonp`
 ****
+<br /><br />
 * 轮播插件 swiper
     * 安装 `npm install swiper@3.4.2 --save`
     * [官网](www.swiper.com.cn)
-****
+***
+<br /><br />
 * 滑屏 Better-Scroll
     * 安装 `npm install better-scroll@1.5.5 --save`
     * [github地址](https://github.com/ustbhuangyi/better-scroll) 
-****
+***
+<br /><br />
 * 优化图片加载
     * 图片懒加载
-    * 使用`react-lazyload` ， 地址 [github](https://github.com/jasonslyvia/react-lazyload)
-    * 安装 `npm install react-lazyload --save`
+    * 使用`react-lazyload` ， 地址 [github](https://github.com/jasonslyvia/react-lazyload)       
+    * 安装 `npm install react-lazyload --save`        
 ***
+<br /><br />
 * 实现动画 react-transition-group 动画库
     * [详情](https://reactcommunity.org/react-transition-group/)
     ```js
@@ -236,5 +241,59 @@ https://u.y.qq.com/cgi-bin/musicu.fcg?
      // 其中in控制组件的状态。
      // 当in为true时，组件的子元素会应用translate-enter、translate-enter-active样式，当in为false时，
      // 组件的子元素会应用translate-exit、translate-exit-active样式。timeout指定过渡时间
+    ```
+***
+<br /><br />
+### 学习到的东西
+<br /><br />
+***
+    ```
+        1. e.stopPropagation() // 阻止事件冒泡
+        2. e.preventDefault()  // 禁用浏览器默认行为
+        3. return false 相当于 1和2
+        
+        4. style计算属性
+            /**
+             * 获取css属性值
+             * @param oElement 节点
+             * @param sName 属性名
+             * @returns {*}
+             */
+            function getStyle(oElement, sName){
+                // currentStyle ie
+                // getComputedStyle 其它
+                return oElement.currentStyle ? oElement.currentStyle[sName] : getComputedStyle(oElement, null)[sName];
+            }
+            
+        5. rem
+            (function (doc, win) {
+                var docEl = doc.documentElement,
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                    recalc = function () {
+                        var clientWidth = docEl.clientWidth;
+                        if (!clientWidth) return;
+                        if(clientWidth>=750){
+                            docEl.style.fontSize = '100px';
+                        }else{
+                            docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                        }
+                    };
+                if (!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+        
+        6. class类模型的使用
+           class Song {
+               constructor(id, mId, name, img, duration, url, singer) {
+                   this.id = id;
+                   this.mId = mId;
+                   this.name = name;
+                   this.img = img;
+                   this.duration = duration;
+                   this.url = url;
+                   this.singer = singer
+               }
+           }   
     ```
 ***

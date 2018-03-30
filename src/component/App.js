@@ -5,7 +5,8 @@ import logo from '../assets/imgs/logo.png';
 import Recommend from './Recommend/Recommend';
 import Ranking from './Ranking/Ranking';
 import Search from './search/Search';
-import Player from '../containers/Player';
+// 音乐播放组件
+import MusicPlayer from '../component/play/MusicPlayer/MusicPlayer';
 
 class App extends Component {
     componentDidMount() {
@@ -44,7 +45,7 @@ class App extends Component {
                             <Route component={Recommend}/>
                         </Switch>
                     </div>
-                    <Player />
+                    <MusicPlayer />
                 </div>
             </Router>
         );
