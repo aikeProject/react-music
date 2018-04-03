@@ -10,7 +10,7 @@ class Loading extends Component {
             <div className={'loading-content'} style={showOrHide}>
                 <div className={'loading-img'}>
                     <img src={loadingImg} width={'60px'} height={'40px'} alt={'loading'}/>
-                    <div className={'title'}>{title}</div>
+                    <div className={'title'}>{title || '加载中...'}</div>
                 </div>
             </div>
         )

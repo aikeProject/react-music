@@ -101,7 +101,7 @@ class Album extends Component {
         }
     };
 
-    // 获取歌曲的vKey
+    // 获取歌曲的vKey, 然后拼接出歌曲文件地址
     getSongUrl(song, mId) {
         getSongVKey(mId).then((res) => {
             if (res && res.code === CODE_SUCCESS) {

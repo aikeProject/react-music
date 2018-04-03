@@ -1,13 +1,17 @@
 // QQ音乐接口
 const URL = {
-  // 轮播接口
-    carousel : 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg',
-  // 专辑推荐
+    // 轮播接口
+    carousel: 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg',
+    // 专辑推荐
     recommend: 'https://u.y.qq.com/cgi-bin/musicu.fcg',
-  // 专辑详情
+    // 专辑详情
     albumInfo: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_album_info_cp.fcg',
-  // 歌曲vkey
+    // 歌曲vkey
     songKey: 'https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg',
+    // 歌曲排行榜
+    rankingList: 'https://c.y.qq.com/v8/fcg-bin/fcg_myqq_toplist.fcg',
+    // 歌曲排行详情
+    rankingInfo: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg',
 };
 // 接口中相同的参数
 const PARAM = {

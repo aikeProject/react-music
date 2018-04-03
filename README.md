@@ -282,7 +282,20 @@ https://u.y.qq.com/cgi-bin/musicu.fcg?
                 win.addEventListener(resizeEvt, recalc, false);
                 doc.addEventListener('DOMContentLoaded', recalc, false);
             })(document, window);
-        
+        7. 使用rem后，获取元素宽度高度的问题？
+        // html font-size: 50px;
+        <style>
+            #wrapper{ width: 2rem; height: 2rem; background-color: aqua;font-size: 20px;}
+        </style>
+        <div id="wrapper" style="width: 2rem;">
+            demo
+        </div>
+        <script>
+        // 实际元素宽度应该是 100px, 但是却是32px
+            var wrapperDom = document.querySelector('#wrapper');
+            console.log(wrapperDom.offsetWidth); // 32 
+            console.log(getStyle(wrapperDom, 'width')); //32px
+        </script>
         6. class类模型的使用
            class Song {
                constructor(id, mId, name, img, duration, url, singer) {
@@ -294,6 +307,37 @@ https://u.y.qq.com/cgi-bin/musicu.fcg?
                    this.url = url;
                    this.singer = singer
                }
-           }   
+           }
+        7. jsonp
+        使用 jsonp(url, option, callback);
+        option -> { param: 'callback', name: '给后台的回调名称', prefix: 'name相同，后面回家数字'}
+        // url = ...?param=name
+        ajax请求受同源策略影响，不允许进行跨域请求，
+        而script标签src属性中的链接却可以访问跨域的js脚本，
+        利用这个特性，服务端不再返回JSON格式的数据，
+        而是返回一段调用某个函数的js代码，
+        在src中进行了调用，这样实现了跨域   
+        8. 深浅拷贝
+        var cloneObj = function(obj){
+            var str, newobj = obj.constructor === Array ? [] : {};
+            if(typeof obj !== 'object'){
+                return;
+            } else if(window.JSON){ // JSON解析
+                str = JSON.stringify(obj), //系列化对象
+                newobj = JSON.parse(str); //还原
+            } else {
+                for(var i in obj){ // 递归解析？
+                    newobj[i] = typeof obj[i] === 'object' ? 
+                    cloneObj(obj[i]) : obj[i]; 
+                }
+            }
+            return newobj;
+        };
+        
+        ES6 浅拷贝
+        Object.assign() 方法可以把任意多个的源对象所拥有的自身可枚举属性拷贝给目标对象，然后返回目标对象.
+        浅：Object.assign({}, obj) // 只拷贝自身和可枚举属性
+        
+        
     ```
 ***
