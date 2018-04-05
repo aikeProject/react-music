@@ -12,6 +12,10 @@ const URL = {
     rankingList: 'https://c.y.qq.com/v8/fcg-bin/fcg_myqq_toplist.fcg',
     // 歌曲排行详情
     rankingInfo: 'https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg',
+    // 搜索推荐接口
+    searchList: 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg',
+    // 搜索接口
+    search: 'https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp'
 };
 // 接口中相同的参数
 const PARAM = {

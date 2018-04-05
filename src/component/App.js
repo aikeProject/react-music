@@ -4,7 +4,8 @@ import './App.styl';
 import logo from '../assets/imgs/logo.png';
 import Recommend from './Recommend/Recommend';
 import Ranking from './Ranking/Ranking';
-import Search from './search/Search';
+// import Search from './search/Search';
+import Search from '../containers/Search';
 // 音乐播放组件
 import MusicPlayer from '../component/play/MusicPlayer/MusicPlayer';
 

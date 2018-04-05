@@ -11,13 +11,15 @@
 import {combineReducers} from 'redux';
 import {CHANGE_SONG, SET_SONGS, SHOW_PLAYER, REMOVE_SONG_FROM_LIST} from "./actionTypes";
 
+// 本地持久化
+import storage from '../util/storage';
+
 // 初始状态数据
 const initState = {
     showStatus: false, // 控制播放状态
-    song: {}, // 当前播放
-    songs: [] // 播放列表
+    song: storage.getCurrentSong(), // 当前播放
+    songs: storage.getSongs() // 播放列表
 };
-
 /**
  * 控制歌曲状态
  * @param showStatus 初值
@@ -42,6 +44,7 @@ function showStatus(showStatus = initState.showStatus, action) {
 function song(song = initState.song, action) {
     switch (action.type) {
         case CHANGE_SONG:
+            storage.setCurrentSong(action.song);
             return action.song;
         default:
             return song;
@@ -57,9 +60,12 @@ function song(song = initState.song, action) {
 function songs(songs = initState.songs, action) {
     switch (action.type) {
         case SET_SONGS:
+            storage.setSongs(action.songs);
             return action.songs;
         case REMOVE_SONG_FROM_LIST:
-            return songs.filter(song => song.id !== action.id);
+            const songList = songs.filter(song => song.id !== action.id);
+            storage.setSongs(songs);
+            return songList;
         default:
             return songs;
     }

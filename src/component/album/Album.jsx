@@ -83,7 +83,7 @@ class Album extends Component {
         const {y} = position;
         const albumBgDom = ReactDOM.findDOMNode(this.refs.albumBg);
         const albumBgFixed = ReactDOM.findDOMNode(this.refs.albumBgFixed);
-        const playButton = ReactDOM.findDOMNode(this.refs.playButton);
+        // const playButton = ReactDOM.findDOMNode(this.refs.playButton);
         if (y < 0) { // 向上滚动
             // 当向上滑动的距离超过，专辑封面的高度，隐藏大图，显示header区域的小图
             if (Math.abs(y) + 55 > albumBgDom.offsetHeight) {
@@ -97,7 +97,7 @@ class Album extends Component {
             const transform = `scale(${scale})`;
             albumBgDom.style['webkitTransform'] = transform;
             albumBgDom.style['transform'] = transform;
-            playButton.style['bottom'] = 20 - y + 'px';
+            // playButton.style['bottom'] = 20 - y + 'px';
         }
     };
 
@@ -125,7 +125,7 @@ class Album extends Component {
 
     // 选择歌曲
     selectSong(song) {
-        const {changeCurrentSong, setMusicSongs, showMusicPlayer} = this.props;
+        const {changeCurrentSong, setMusicSongs} = this.props;
         return (e) => {
             setMusicSongs([song]);
             changeCurrentSong(song);

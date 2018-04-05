@@ -46,6 +46,17 @@ export function createAlbumByDetail(data) {
     )
 }
 
+export function createAlbumBySearch(data) {
+    return new Album(
+        data.albumid,
+        data.albummid,
+        data.albumname,
+        `http://y.gtimg.cn/music/photo_new/T002R68x68M000${data.albummid}.jpg?max_age=2592000`,
+        data.singername,
+        "",
+    )
+}
+
 // 歌手
 function filterSinger(singers) {
     // 获取歌手的姓名

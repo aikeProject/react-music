@@ -21,8 +21,8 @@ function getStyle(oElement, sName){
  * @param second
  * @returns {string}
  */
-function getTime(second) {
-    var second = Math.floor(second); // 秒
+function getTime(option) {
+    let second = Math.floor(option); // 秒
     let minute = Math.floor(second / 60); // 分
     second = second - minute * 60; // 剩余秒
     return `${minute}:${formatTime(second)}`

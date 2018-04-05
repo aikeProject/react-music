@@ -106,7 +106,7 @@ class Recommend extends Component {
                 <div className={'album-wrapper'} key={album.id}
                     onClick={this.toAlbumDetail(`${match.url + '/' + album.mId}`)}>
                     <div className={'left'}>
-                        <LazyLoad>
+                        <LazyLoad height={'2rem'}>
                             <img src={album.img} alt={album.name}/>
                         </LazyLoad>
                     </div>

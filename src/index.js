@@ -5,7 +5,9 @@ import './util/rem';
 // 全局样式
 import './index.styl';
 // 字体图标
-import '@/assets/stylus/font.styl';
+// import '@/assets/stylus/font.styl';
+// import '@/assets/stylus/common.styl';
+import '@/assets/stylus/index.styl';
 
 // import App from './component/App';
 import Root from './component/Root';

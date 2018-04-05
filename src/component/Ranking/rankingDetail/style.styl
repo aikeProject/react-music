@@ -4,6 +4,112 @@
     top 0
     left 0
     right 0
-    bottom 1.04rem
-    color white
+    bottom 0
     background-image: linear-gradient(177deg, #000000 0%, #343038 100%)
+    .album-top
+        position relative
+        .album-img
+            position relative
+            width 100%
+            padding-top 70%
+            background-repeat no-repeat
+            background-size cover
+            transform-origin top center
+            transition transform
+            &.fixed
+                position fixed
+                top 0
+                height 55px
+                z-index 1
+                padding 0
+                display none
+                background-position 0 0
+            .filter
+                position absolute
+                top 0
+                left 0
+                width 100%
+                height 100%
+                background rgba(0,0,0,0.2)
+        .play-wrapper
+            position absolute
+            bottom 0.2rem
+            font-size 0.44rem
+            text-align center
+            color #e2509d
+            width 100%
+            display flex
+            justify-content center
+            padding-top 50px
+            .play-button
+                width 2.4rem
+                padding 0.2rem
+                border-radius 0.2rem
+                border 1px solid #e2509d
+                display: flex
+                align-items center
+                i
+                    margin-right 0.1rem
+    .album-content
+        position absolute
+        width 100%
+        bottom 1.04rem
+        margin-top 0.04rem
+        background-color: #212121
+        .album-scroll
+            width 100%
+            height 100%
+            .scroll
+                overflow visible
+            .album-wrapper
+                padding 0.5rem 0.5rem 0 0.5rem
+                background-color: #212121
+                color #e2509d
+                .song-count
+                    font-size 0.28rem
+                    letter-spacing 1px
+                    margin-bottom 0.1rem
+                .song-list
+                    font-size 0.4rem
+                    .song
+                        border 1px solid #f854af
+                        border-radius 0.1rem
+                        margin-bottom 0.1rem
+                        display flex
+                        align-items center
+                        .index
+                            margin-left .15rem
+                            font-size 16px
+                        .content
+                            margin-left .2rem
+                            .song-name
+                                font-size 0.28rem
+                                padding-top 0.16rem
+                            .song-singer
+                                font-size 0.26rem
+                                padding-top 0.16rem
+                                padding-bottom .1rem
+                .song-list > div:nth-of-type(1)
+                    .index
+                        color #fa6513
+                        font-size 24px
+                .song-list > div:nth-of-type(2)
+                    .index
+                        color #fa3371
+                        font-size 18px
+                .song-list > div:nth-of-type(3)
+                    .index
+                        color #fa6f81
+                .album-info
+                    padding-bottom 0.5rem
+                    color #fa55b0
+                    .album-title
+                        font-size 0.36rem
+                        text-align center
+                    .album-desc
+                        font-size 0.28rem
+                        margin-top 0.3rem
+                        line-height 0.44rem
+                        letter-spacing 1px
+                        text-indent 2em
+

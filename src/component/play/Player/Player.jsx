@@ -14,9 +14,10 @@ import {Song} from '@/model/song';
 import MiniPlayer from '../MiniPlayer/MiniPlayer';
 
 class Player extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.currentSong = new Song(0, '', '', '', 0, '', '');
+        // this.currentSong = props.currentSong;
         this.currentIndex = 0;
         // 拖拽进度
         this.dragProgress = 0;
@@ -46,6 +47,10 @@ class Player extends Component {
     //播放暂停
     playOrPasuse() {
         if (this.audioDOM.paused) {
+            if (this.first === undefined) {
+                this.audioDOM.src = this.currentSong.url;
+                this.first = true;
+            }
             this.audioDOM.play();
             this.startImgRotate();
             this.setState({playStatus: true});
@@ -255,20 +260,27 @@ class Player extends Component {
     };
 
     render() {
-        let song = this.currentSong;
         const {currentSong, showStatus, showList, currentIndex} = this.props;
+        if (currentSong && currentSong.url) {
+            // 歌曲发生变化
+            // 第一次播放
+            if (this.firstCurrent === undefined) {
+                this.currentSong = currentSong;
+                this.firstCurrent = true;
+            }
+            if (this.currentSong.id !== currentSong.id) {
+                this.currentSong = currentSong;
+                if (this.audioDOM) {
+                    this.audioDOM.src = this.currentSong.url;
+                    this.audioDOM.load();
+                }
+            }
+        }
+        let song = this.currentSong;
         this.currentIndex = currentIndex; // 歌曲播放位置
         let playBg = song.img ? song.img : require('@/assets/imgs/play_bg.jpg');
         let playButtonClass = this.state.playStatus === true ? 'icon-pause' : 'icon-play';
         song.playStatus = this.state.playStatus;
-        if (currentSong && currentSong.url) {
-            // 歌曲发生变化
-            if (this.currentSong.id !== currentSong.id) {
-                this.currentSong = currentSong;
-                this.audioDOM.src = this.currentSong.url;
-                this.audioDOM.load();
-            }
-        }
         return (
             <div className={'player-container'}>
                 <CSSTransition in={showStatus} timeout={300} classNames={'player-rotate'} onEnter={() => {

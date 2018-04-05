@@ -8,7 +8,8 @@ import {createRankingByList} from '@/model/ranking';
 import LazyLoad, {forceCheck} from 'react-lazyload';
 import Loading from '@/common/loading/Loading';
 import Scroll from '@/common/scroll/Scroll';
-import RankingDetail from './rankingDetail/rankingDetail';
+// import RankingDetail from './rankingDetail/rankingDetail';
+import RankingDetail from '../../containers/Ranking';
 
 class Ranking extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class Ranking extends Component {
                     // 过滤掉mv
                     const topList = [];
                     res.data.topList.forEach((item) => {
-                        if (/MV/i.test(item)) {
+                        if (/MV/i.test(item.topTitle)) {
                             return;
                         }
                         topList.push(createRankingByList(item));
@@ -66,7 +67,7 @@ class Ranking extends Component {
                                 <div className={'ranking-wrapper'} key={ranking.id}
                                 onClick={this.goDetail(`${match.url}/${ranking.id}`)}>
                                     <div className={'left'}>
-                                        <LazyLoad>
+                                        <LazyLoad height={'2rem'}>
                                             <img src={ranking.img} alt={ranking.title}/>
                                         </LazyLoad>
                                     </div>

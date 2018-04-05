@@ -61,7 +61,6 @@ class PlayerList extends Component {
 
     render() {
         const {playSongs, show, currentSong} = this.props;
-        console.log(playSongs);
         const playList = playSongs.map((song, index) => {
             let isCurrent = false;
             if (song.id === currentSong.id) {

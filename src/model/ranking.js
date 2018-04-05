@@ -23,7 +23,7 @@ export function createRankingByInfo(data) {
         data.topId,
         data.ListName,
         data.pic_album,
-        ''
+        []
     );
 }
 
