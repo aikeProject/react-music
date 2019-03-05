@@ -55,4 +55,7 @@ module.exports = function(config) {
     // 根路径别名
     let alias = config.resolve.alias;
     alias["@"] = baseConfig.rootPath;
+
+    // 打包不包含map
+    config.devtool = 'cheap-eval-source-map';
 };
